@@ -11,7 +11,13 @@ def create_product(request):
     return render(request, "home.html", context = {})
 
 def view_products(request):
-    return render(request, "products.html", context = {})
+
+    products = Products.objects.all().values()
+    context = {
+        'Products': products
+    }
+
+    return render(request, "products.html", context = context)
 
 def search_product(request):
     return render(request, "home.html", context = {})
