@@ -6,3 +6,12 @@ from products.models import Categories, Products
 
 def home(request):
     return render(request, "home.html", context = {})
+
+def create_product(request):
+    return render(request, "home.html", context = {})
+
+def view_products(request):
+    return render(request, "products.html", context = {})
+
+def search_product(request):
+    return render(request, "home.html", context = {})
