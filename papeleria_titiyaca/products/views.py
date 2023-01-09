@@ -60,7 +60,8 @@ def create_category(request):
             )
             context = { 
                 'message': 'Categoria creada exitosamente',
-                'form':NewCategoryForm()}
+                'form':NewCategoryForm()
+                }
             return render(request,'products/create_category.html',context=context)
         else:
             context = {
@@ -71,9 +72,12 @@ def create_category(request):
 
 def list_categories(request):
 
-    categories = Categories.objects.all().values()
+    if 'search' in request.GET:
+        search = request.GET['search']
+        category = Categories.objects.filter(name__contains=search)
+    else:    
+        category = Categories.objects.all()    
     context = {
-        'Categories': categories
+            'categories':category,
     }
-
-    return render(request, "categories.html", context = context)
+    return render(request, 'products/list_categories.html', context=context)
