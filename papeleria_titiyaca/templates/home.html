@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <h1>Bienvenidos a la mejor papeleria del Uruguay</h1>    
-</div>
-<h2> ------- </h2><a href="/orders/list-payment-methods/" class="btn btn-primary">Listar métodos de pagos</a>
-<h2> ------- </h2><a href="/orders/list-orders-status/" class="btn btn-primary">Listar estados de órdenes</a>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <h1>Bienvenidos a la mejor papeleria del Uruguay</h1>    
+    </div>
+    <h2> ------- </h2><a href="/orders/list-payment-methods/" class="btn btn-primary">Listar métodos de pagos</a>
+    <h2> ------- </h2><a href="/orders/list-orders-status/" class="btn btn-primary">Listar estados de órdenes</a>
+    <h2> ------- </h2><a href="/products/list-products/" class="btn btn-primary">Listar productos</a>
+    <h2> ------- </h2><a href="/products/list-categories/" class="btn btn-primary">Listar categorias</a>
 {% endblock content %}

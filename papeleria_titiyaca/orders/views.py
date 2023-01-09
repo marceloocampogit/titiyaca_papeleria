@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
 from orders.models import OrderStatus, PaymentMethod
-from orders.forms import OrderStatusForm, PaymentMethodForm
+from .forms import OrderStatusForm, PaymentMethodForm
 
 # Create your views here.
 def create_order_status(request):
@@ -18,7 +18,8 @@ def create_order_status(request):
                 status = form.cleaned_data['status'],                
             )
             context = { 
-                'message': 'Estado de orden creado exitosamente'
+                'message': 'Estado de orden creado exitosamente',
+                'form':OrderStatusForm()
              }
             return render(request,'orders/create_order_status.html',context=context)
         else:
@@ -54,7 +55,8 @@ def create_payment_method(request):
                 payment_method_short = form.cleaned_data['payment_method_short'],
             )
             context = { 
-                'message': 'Método de pago creado exitosamente'
+                'message': 'Método de pago creado exitosamente',
+                'form':PaymentMethodForm()
              }
             return render(request,'orders/create_payment_method.html',context=context)
         else:
