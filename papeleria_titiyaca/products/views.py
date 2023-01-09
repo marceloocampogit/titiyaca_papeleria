@@ -9,7 +9,7 @@ def create_product(request):
         context = {
             'form':NewProductForm()
         }
-        return render(request,'orders/create_order_status.html',context=context)
+        return render(request,'products/create_product.html',context=context)
     elif request.method == 'POST':
         form = NewProductForm(request.POST)
         if form.is_valid():
@@ -21,32 +21,53 @@ def create_product(request):
                 product_description = form.cleaned_data['product_description']           
             )
             context = { 
-                'message': 'Estado de orden creado exitosamente',
-                'form':NewProductForm()
-             }
-            return render(request,'orders/create_order_status.html',context=context)
+                'message': 'Producto creado exitosamente',
+                'form':NewProductForm()}
+            return render(request,'products/create_product.html',context=context)
         else:
             context = {
                 'form_errors':form.errors,
                 'form': NewProductForm()                 
             }
-            return render(request,'orders/create_order_status.html',context=context)
-    return render(request, "home.html", context = {})
+            return render(request,'products/create_product.html',context=context)
 
 def list_products(request):
-
-    products = Products.objects.all().values()
+    if 'search' in request.GET:
+        search = request.GET['search']
+        product = Products.objects.filter(name__contains=search)
+    else:    
+        product = Products.objects.all()    
     context = {
-        'Products': products
+            'products':product,
     }
+    return render(request, 'products/list_products.html', context=context)
 
-    return render(request, "products.html", context = context)
 
 def search_product(request):
     return render(request, "home.html", context = {})
 
 def create_category(request):
-    return render(request, "home.html", context = {})
+    if request.method == 'GET':
+        context = {
+            'form':NewCategoryForm()
+        }
+        return render(request,'products/create_category.html',context=context)
+    elif request.method == 'POST':
+        form = NewCategoryForm(request.POST)
+        if form.is_valid():
+            Categories.objects.create(
+                category_name = form.cleaned_data['category_name']    
+            )
+            context = { 
+                'message': 'Categoria creada exitosamente',
+                'form':NewCategoryForm()}
+            return render(request,'products/create_category.html',context=context)
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': NewCategoryForm()                 
+            }
+            return render(request,'products/create_category.html',context=context)
 
 def list_categories(request):
 
