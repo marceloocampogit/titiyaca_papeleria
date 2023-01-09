@@ -14,7 +14,6 @@ def create_product(request):
         form = NewProductForm(request.POST)
         if form.is_valid():
             Products.objects.create(
-                status = form.cleaned_data['status'],
                 product_name = form.cleaned_data['product_name'],
                 product_code = form.cleaned_data['product_code'],
                 category_name = form.cleaned_data['category_name'],
