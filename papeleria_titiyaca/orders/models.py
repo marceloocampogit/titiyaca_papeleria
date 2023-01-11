@@ -22,7 +22,7 @@ class Orders(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)    
     payment_method_short = models.ForeignKey(PaymentMethod, on_delete= models.CASCADE)     
     status = models.ForeignKey(OrderStatus, on_delete= models.CASCADE)
-    client_name = models.CharField(max_length=100)
+    client_name = models.CharField(max_length=100, blank= True)
 
     def __str__(self):
         return self.name
