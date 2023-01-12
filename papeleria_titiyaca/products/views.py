@@ -34,7 +34,7 @@ def create_product(request):
 def list_products(request):
     if 'search' in request.GET:
         search = request.GET['search']
-        product = Products.objects.filter(name__contains=search)
+        product = Products.objects.filter(product_name__contains=search)
     else:    
         product = Products.objects.all()    
     context = {

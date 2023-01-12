@@ -4,6 +4,13 @@
   Listado de categorias
 {% endblock %}
 
+{% block nav %}
+  <form class="form-inline my-2 my-lg-0" action= "/products/list-categories/" method= "GET">
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Filtre una categoría" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+{% endblock %}
+
 {% block content %}
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         <h1>Estas son nuestras categorias!</h1>
