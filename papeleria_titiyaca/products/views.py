@@ -43,7 +43,6 @@ def list_products(request):
     }
     return render(request, 'products/list_products.html', context=context)
 
-
 def delete_product(request):
     return render(request, "home.html", context = {})
 
