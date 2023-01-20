@@ -7,7 +7,6 @@ class Categories(models.Model):
 class Products(models.Model):
     product_name = models.CharField(max_length=100)
     product_code = models.IntegerField()
-    category_name = models.CharField(max_length=200)
-    #category_name = models.ForeignKey(Categories, on_delete= models.CASCADE)
+    category_name = models.CharField(max_length=100)
     product_price = models.FloatField()
     product_description = models.CharField(max_length=200)

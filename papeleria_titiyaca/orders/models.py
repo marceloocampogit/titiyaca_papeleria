@@ -17,7 +17,7 @@ class PaymentMethod(models.Model):
         return self.name
 
 class Orders(models.Model):
-    order_code = models.IntegerField(max_length=10)    
+    order_code = models.IntegerField()    
     order_price = models.FloatField()
     creation_time = models.DateTimeField(auto_now_add=True)    
     payment_method_short = models.ForeignKey(PaymentMethod, on_delete= models.CASCADE)     
@@ -29,7 +29,7 @@ class Orders(models.Model):
 
 class OrderItems(models.Model):
     order_code = models.ForeignKey(Orders, on_delete= models.CASCADE)     
-    item_code = models.IntegerField(max_length=3)
+    item_code = models.IntegerField()
     product_code = models.ForeignKey(Products, on_delete= models.CASCADE)
 
     def __str__(self):
