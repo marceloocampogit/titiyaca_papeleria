@@ -67,10 +67,10 @@ def update_product(request, pk):
     elif request.method == 'POST':
         form = NewProductForm(request.POST)
         if form.is_valid():
-            product.product_name = form.cleaned_data['product_name'],
-            product.product_code = form.cleaned_data['product_code'],
-            product.category_name = form.cleaned_data['category_name'],
-            product.product_price = form.cleaned_data['product_price'],
+            product.product_name = form.cleaned_data['product_name']
+            product.product_code = form.cleaned_data['product_code']
+            product.category_name = form.cleaned_data['category_name']
+            product.product_price = form.cleaned_data['product_price']
             product.product_description = form.cleaned_data['product_description']
             product.save()           
             
