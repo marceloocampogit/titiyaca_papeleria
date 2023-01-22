@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Listado de categorias
+  Listado de categorías
 {% endblock %}
+
 
 {% block nav %}
   <form class="form-inline my-2 my-lg-0" action= "/products/list-categories/" method= "GET">
@@ -13,14 +14,30 @@
 
 {% block content %}
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        <h1>Estas son nuestras categorias!</h1>
+        <h1>Estos son nuestras categorías!</h1>
     </div>
-    {% for category in categories %}
-    <div class="card" style="width: 18rem;">
-      <img src="data:image/jpeg;base64,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" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{category.category_name}}</h5>                       
-      </div>
-    </div>  
-  {% endfor %}
+    <table class="table table-bordered">
+      <thead style="background-color: antiquewhite;">
+        <tr>        
+          <td>Código de categoria</td>
+          <td>Categoría</td>
+          <td>Deseas modificar?</td>
+          <td>Deseas eliminar?</td>                
+        </tr>
+      </thead>
+      <tbody>
+        {% if object_list %}
+          {% for category in object_list %}
+            <tr>
+              <td>{{category.category_code}}</td>              
+              <td>{{category.category_name}}</td>            
+              <td> <a href="/products/update-category/{{category.id}}/" class="btn btn-primary">Modificar</a> </td>             
+              <td> <a href="/products/delete-category/{{category.id}}/" class="btn btn-danger">Borrar</a> </td>
+            </tr>
+          {% endfor %}                
+        {% else %}   
+          <h1>No hay categorías para mostrar</h1>    
+        {% endif %}
+      </tbody>
+    </table>      
 {% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Confirmación borrado de categoría
+{% endblock %}
+
+{% block content %}    
+     <center>   
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <h2>Categoría a Eliminar: </h2>  
+        </div>    
+        <h2 style="color: red;">Código de categoría: {{object.category_code}}</h2>
+        <p>¿Está seguro que desea eliminar esta categoría?</p>
+        <form action="" method="POST">
+            {% csrf_token %}                
+            <input type="submit" value="Si, eliminar">    
+        </form>  
+    </center>        
+{% endblock %} 

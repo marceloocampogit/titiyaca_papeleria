@@ -24,13 +24,6 @@
         position: relative;
       }
 
-      .Botones-home {
-        display: flex;
-        margin-top: 30px;
-        align-items: center;
-        justify-content: space-evenly;
-      }
-
     </style>
 
 </head>
@@ -44,12 +37,34 @@
               </button>          
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href= "/products/create-product/">Crear productos<span class="sr-only">(current)</span></a>
+                  <!-- Products -->                   
+                  <li class="nav-item dropdown">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Productos
+                    </a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/products/create-product/">Crear</a>
+                      </li>                        
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/products/list-products/">Listar</a>
+                      </li>
+                    </ul>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href= "/products/create-category/">Crear categorias<span class="sr-only">(current)</span></a>
-                  </li>
+                  <!-- Categories -->                   
+                  <li class="nav-item dropdown">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Categorias
+                    </a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/products/create-category/">Crear</a>
+                      </li>                        
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/products/list-categories/">Listar</a>
+                      </li>
+                    </ul>
+                  </li>          
                   <!-- Orders -->                   
                   <li class="nav-item dropdown">  
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -2,14 +2,19 @@ from django.contrib import admin
 from django.urls import path
 
 from products.views import create_product, list_products, list_categories, create_category, update_product
+from products.views import CreateProduct, UpdateProduct, DeleteProduct, ListProducts, CreateCategory, ListCategories, UpdateCategory, DeleteCategory
 
 urlpatterns = [
-    
-    path('create-product/', create_product, name='create_product'),
-    path('list-products/', list_products, name='list_products'),
-    path('update-product/<int:pk>', update_product, name='update_product'),
+    # Products
+    path('create-product/', CreateProduct.as_view(), name='create_product'),
+    path('list-products/', ListProducts.as_view(), name='list_products'),
+    path('update-product/<int:pk>/', UpdateProduct.as_view(), name='update_product'),
+    path('delete-product/<int:pk>/', DeleteProduct.as_view(), name='delete_product'),
 
-    path('create-category/', create_category, name='create_category'),
-    path('list-categories/', list_categories, name='list_categories'),
+    #Categories
+    path('create-category/', CreateCategory.as_view(), name='create_category'),
+    path('list-categories/', ListCategories.as_view(), name='list_categories'),
+    path('update-category/<int:pk>/', UpdateCategory.as_view(), name='update_category'),
+    path('delete-category/<int:pk>/', DeleteCategory.as_view(), name='delete_category'),
 
 ]

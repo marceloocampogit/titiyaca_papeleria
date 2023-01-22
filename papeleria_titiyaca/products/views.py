@@ -1,9 +1,60 @@
 from django.shortcuts import render
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from products.models import Categories, Products
 from .forms import NewProductForm, NewCategoryForm
 
 # Create your views here.
+
+# ------------------------------------------- Products GViews ------------------------------------------- #
+class CreateProduct(CreateView):
+    model = Products
+    template_name = 'products/create_product.html'
+    fields = '__all__'
+    success_url = '/products/list-products/'
+
+class DeleteProduct(DeleteView):
+    model = Products
+    template_name = 'products/delete_product.html'
+    success_url = '/products/list-products/'
+
+class UpdateProduct(UpdateView):
+    model = Products
+    template_name = 'products/update_product.html'
+    fields = '__all__'
+    success_url = '/products/list-products/'
+
+class ListProducts(ListView):
+    model = Products
+    template_name = 'products/list_products.html'
+    fields = '__all__'
+
+# ------------------------------------------- Categories GViews ------------------------------------------- #
+
+class CreateCategory(CreateView):
+    model = Categories
+    template_name = 'products/create_category.html'
+    fields = '__all__'
+    success_url = '/products/list-categories/'
+
+class DeleteCategory(DeleteView):
+    model = Categories
+    template_name = 'products/delete_category.html'
+    success_url = '/products/list-categories/'
+
+class UpdateCategory(UpdateView):
+    model = Categories
+    template_name = 'products/update_category.html'
+    fields = '__all__'
+    success_url = '/products/list-categories/'
+
+class ListCategories(ListView):
+    model = Categories
+    template_name = 'products/list_categories.html'
+    fields = '__all__'
+
+# ----------------------------------------------------------------------------------------------------------- #
 
 def create_product(request):
     if request.method == 'GET':
