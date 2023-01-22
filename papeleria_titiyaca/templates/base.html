@@ -34,46 +34,81 @@
     </style>
 
 </head>
-<body>
+<body> 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href= "/products/create-product/">Crear productos<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href= "/products/create-category/">Crear categorias<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Ordenes</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Crear órden</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/orders/create-payment-method/">Crear método de pago</a>
-                </li>                
-                <li class="nav-item">
-                  <a class="nav-link" href="/orders/create-order-status/">Crear estado de la órden</a>                  
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about-us/">Sobre nosotros</a>
-                </li>
-              </ul>
-              {% block nav %}
-              {% endblock  %}
+            <div class="container">
+              <a class="navbar-brand" href="/">Home</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>          
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href= "/products/create-product/">Crear productos<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href= "/products/create-category/">Crear categorias<span class="sr-only">(current)</span></a>
+                  </li>
+                  <!-- Orders -->                   
+                  <li class="nav-item dropdown">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Órdenes
+                    </a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/orders/create-order/">Crear</a>
+                      </li>                        
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/orders/list-orders/">Listar</a>
+                      </li>
+                    </ul>
+                  </li>                 
+                  <!-- Paymenth Methods -->                
+                  <li class="nav-item dropdown">  
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Métodos de Pago
+                      </a>
+                      <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item text-white" href="/orders/create-payment-method/">Crear</a>
+                        </li>                        
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item text-white" href="/orders/list-payment-methods/">Listar</a>
+                        </li>
+                      </ul>
+                  </li> 
+                  <!-- Orders Status -->                               
+                  <li class="nav-item dropdown">  
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Estados de Órdenes
+                    </a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/orders/create-order-status/">Crear</a>
+                      </li>                        
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/orders/list-orders-status/">Listar</a>
+                      </li>
+                    </ul>
+                  </li>  
+                  <!-- About Us -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="/about-us/">Sobre nosotros</a>
+                  </li>
+                </ul>
+                {% block nav %}                
+                {% endblock  %}
+              </div>
             </div>
           </nav>
     </header>
 
-    <div>
+    <div>      
+      <div class="container">      
         {% block content %}
         {% endblock  %}
+      </div>
     </div>
     
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -115,6 +150,5 @@
   </div>
   <!-- Copyright -->
 </footer>
-
 </body>
 </html>

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Creación de estados de órdenes
+  Creación de Items de Órdenes
 {% endblock %}
 
 {% block content %}  
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <h2>Crear Estado de Órden</h2>    
+    <h2>Agregar Items a la Órden</h2>    
   </div>
   <br>
   {% if form %}
@@ -18,9 +18,14 @@
             {{form.as_table}}
         </table>
         <br>
-        <input type="submit" value="Crear">    
+        <input type="submit" value="Crear">           
     </form>  
-    </center>
+    <form action="/orders/list-orders/" method="GET">
+      {% csrf_token %}      
+      <br>
+      <input type="submit" value="Finalizar">           
+    </form>     
+    </center> 
   {% endif %}
 
   {% if form_errors %}

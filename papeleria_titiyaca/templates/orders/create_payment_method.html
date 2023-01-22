@@ -5,17 +5,22 @@
 {% endblock %}
 
 {% block content %}  
-
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <h2>Crear Método de Pago</h2>    
+  </div>
+  <br>
   {% if form %}
+    <center>
     <form action="" method="POST">
         {% csrf_token %}
         
         <table>
             {{form.as_table}}
         </table>
-        
-        <input type="submit" value="Crear método de pago">    
-    </form>  
+        <br>
+        <input type="submit" value="Crear">    
+    </form> 
+    </center> 
   {% endif %}
 
   {% if form_errors %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Confirmación de borrado de método de pago
+{% endblock %}
+
+{% block content %}    
+    {% if message %}
+        <h2 style="color: green;"> {{message}} </h2>
+    {% else %}
+        {% if object %}   
+            <center>   
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                <h2>Método de Pago a Eliminar: </h2>  
+            </div>    
+            <h2 style="color: red;">{{object.payment_method_large}} ({{object.payment_method_short}})</h2>
+            <p>¿Está seguro que desea eliminarlo?</p>
+            <form action="" method="POST">
+                {% csrf_token %}                
+                <input type="submit" value="Si, eliminar">    
+            </form>  
+            </center>
+        {% else %}    
+            <h2>Método de pago a borrar {{prpayment_method.payment_method_large}}</h2>  
+            <p>Seguro que desea eliminarlo?</p>
+            <form action="" method="POST">
+                {% csrf_token %}                
+                <input type="submit" value="Si, borrar">    
+            </form>         
+        {% endif %}                  
+    {% endif %}
+{% endblock %} 

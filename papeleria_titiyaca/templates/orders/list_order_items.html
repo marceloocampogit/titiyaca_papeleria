@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Listado de Detalle de Órdenes
+{% endblock %}
+
+{% block content %}
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    {% if order_items %}
+      <h2>Listado de Detalle de la Orden {{order_code}}</h2>    
+    {% else %}
+      <h2>Listado de Detalle de Órdenes</h2>
+    {% endif %}
+  </div>
+  {% if order_items %}
+    <table class="table table-bordered">
+      <thead style="background-color: antiquewhite;">
+        <tr>        
+          <td>Código Órden</td>
+          <td>Nro Línea</td>                    
+          <td>Producto</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% if order_items %}
+          {% for order_item in order_items %}             
+            <tr>            
+              <td>{{order_item.order_code}}</td>
+              <td>{{order_item.item_code}}</td>            
+              <td>{{order_item.product_code}}</td>            
+              <td> <center> <a href="/orders/update-order-items/{{order_item.id}}/" class="btn btn-primary">Modificar</a> </center> </td>             
+              <td> <center> <a href="/orders/delete-order-items/{{order_item.id}}/" class="btn btn-danger">Borrar</a> </center> </td>            
+            </tr>
+          {% endfor %}                
+        {% else %}   
+          <h1>No hay registros de detalle para la presente orden</h1>    
+        {% endif %}
+      </tbody>
+    </table>    
+  {% else %}   
+    <br>
+    <center>
+      <h1>No hay registros de detalle para la presente orden</h1>    
+    </center>
+  {% endif %}      
+{% endblock %}
+
+
