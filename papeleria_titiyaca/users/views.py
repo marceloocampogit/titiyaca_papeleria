@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.views import LogoutView
 
 from django.shortcuts import render
 
@@ -29,9 +30,13 @@ def login_view(request):
                 }
                 return render(request, 'home.html', context=context)
         
-        form = AuthenticationForm()
-        context = {
+        else:
+            form = AuthenticationForm()
+            context = {
             'form': form,
             'errors': 'Usuario o contraseña incorrectos.'
         }
         return render(request, 'users/login.html', context=context)
+
+class LogoutUser(LogoutView):
+    template_name = 'users/logout.html'
