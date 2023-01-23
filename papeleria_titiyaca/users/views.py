@@ -1,8 +1,8 @@
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -26,7 +26,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 context = {
-                    'message': f'Bienivenido {username} !'
+                    'message': f'Bienvenido {username} !'
                 }
                 return render(request, 'home.html', context=context)
         
@@ -38,5 +38,25 @@ def login_view(request):
         }
         return render(request, 'users/login.html', context=context)
 
+def register_view(request):
+    if request.method == 'GET':
+        form = UserCreationForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'users/register.html', context=context)
+    elif request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save() #Guarda el usuario en la base de datos
+            return redirect('login') #Redirecciona a la vista login
+
+        context = {
+            'errores': form.errors,
+            'form': UserCreationForm()
+        }    
+        return render(request, 'users/register.html', context=context)
+
 class LogoutUser(LogoutView):
     template_name = 'users/logout.html'
+

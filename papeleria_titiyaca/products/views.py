@@ -94,9 +94,6 @@ def list_products(request):
     }
     return render(request, 'products/list_products.html', context=context)
 
-def delete_product(request):
-    return render(request, "home.html", context = {})
-
 def update_product(request, pk):
     product = Products.objects.get(id = pk)
 
@@ -169,9 +166,3 @@ def list_categories(request):
             'categories':category,
     }
     return render(request, 'products/list_categories.html', context=context)
-
-def delete_category(request):
-    return render(request, "home.html", context = {})
-
-def update_category(request):
-    return render(request, "home.html", context = {})

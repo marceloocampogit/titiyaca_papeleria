@@ -3,4 +3,9 @@
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         <h1>Bienvenidos a la mejor papeleria del Uruguay</h1>    
     </div>
+
+{% if message %}
+    <h4 style= "margin-left: 370px; margin-top: 10px;">{{message}}</h4>
+{% endif %}
+
 {% endblock content %}
