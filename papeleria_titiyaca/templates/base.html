@@ -44,9 +44,11 @@
                       Productos
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                      <li class="dropdown-submenu">
-                        <a class="dropdown-item text-white" href="/products/create-product/">Crear</a>
-                      </li>                        
+                      {% if request.user.is_authenticated and request.user.is_superuser %}
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item text-white" href="/products/create-product/">Crear</a>
+                        </li>  
+                      {% endif %}                      
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/products/list-products/">Listar</a>
                       </li>
@@ -58,9 +60,11 @@
                       Categorias
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                      <li class="dropdown-submenu">
-                        <a class="dropdown-item text-white" href="/products/create-category/">Crear</a>
-                      </li>                        
+                      {% if request.user.is_authenticated and request.user.is_superuser %}
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item text-white" href="/products/create-category/">Crear</a>
+                        </li>       
+                      {% endif %}                 
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/products/list-categories/">Listar</a>
                       </li>

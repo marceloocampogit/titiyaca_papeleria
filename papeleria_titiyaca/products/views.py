@@ -25,7 +25,7 @@ class UpdateProduct(UpdateView):
     fields = '__all__'
     success_url = '/products/list-products/'
 
-class ListProducts(ListView):
+class ListProducts(LoginRequiredMixin , ListView):
     model = Products
     template_name = 'products/list_products.html'
     fields = '__all__'
