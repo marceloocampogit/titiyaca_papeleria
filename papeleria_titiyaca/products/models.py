@@ -6,14 +6,14 @@ class Categories(models.Model):
     category_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.category_code)
+        return self.category_name
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)
     product_code = models.IntegerField(unique= True)
-    category_name = models.CharField(max_length=100)
+    category_code = models.ForeignKey(Categories, on_delete= models.CASCADE)    
     product_price = models.FloatField()
     product_description = models.CharField(max_length=200)
     
     def __str__(self):
-        return str(self.product_code)
+        return self.product_name
