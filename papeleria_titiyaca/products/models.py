@@ -6,7 +6,7 @@ class Categories(models.Model):
     category_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.category_code
+        return self.category_name
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)
@@ -16,4 +16,4 @@ class Products(models.Model):
     product_description = models.CharField(max_length=200)
     
     def __str__(self):
-        return self.product_code
+        return self.product_name
