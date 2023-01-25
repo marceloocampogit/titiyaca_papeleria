@@ -40,7 +40,11 @@
   {% else %}   
     <br>
     <center>
-      <h1>No hay registros de detalle para la presente orden</h1>    
+      <h1>No hay registros de detalle para la presente orden</h1>   
+      <form action="" method="POST">
+        {% csrf_token %}                
+        <a href="/orders/list-orders/" class="btn btn-primary">Volver</a>
+    </form> 
     </center>
   {% endif %}      
 {% endblock %}
