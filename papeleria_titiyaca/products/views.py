@@ -30,6 +30,13 @@ class ListProducts(LoginRequiredMixin , ListView):
     template_name = 'products/list_products.html'
     fields = '__all__'
 
+    def get_queryset(self, *args, **kwargs):
+        productFilter = super().get_queryset(*args, **kwargs)
+        query = self.request.GET.get('search')
+        if query:
+            return productFilter.filter(product_name__contains=query)
+        return productFilter
+
 # ------------------------------------------- Categories GViews ------------------------------------------- #
 
 class CreateCategory(CreateView):
@@ -53,6 +60,13 @@ class ListCategories(ListView):
     model = Categories
     template_name = 'products/list_categories.html'
     fields = '__all__'
+
+    def get_queryset(self, *args, **kwargs):
+        categoryFilter = super().get_queryset(*args, **kwargs)
+        query = self.request.GET.get('search')
+        if query:
+            return categoryFilter.filter(category_name__contains=query)
+        return categoryFilter
 
 # ----------------------------------------------------------------------------------------------------------- #
 
