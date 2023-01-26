@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from orders.models import OrderStatus, PaymentMethod, Orders, OrderItems
-from orders.forms import OrderStatusForm, PaymentMethodForm
+from orders.forms import OrderStatusForm, PaymentMethodForm, OrderItemsForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Orders ----------------------------------------------------------------
@@ -37,11 +37,57 @@ class OrderItemsCreateView(CreateView):
     success_url = '/orders/create-order-items/'     
 
 class OrderItemsUpdateView(UpdateView):
-    model = OrderItems
-    template_name = 'orders/update_order_items.html'    
-    fields = '__all__'
-#    fields
-    success_url = '/orders/list-order-items/pk/'
+     model = OrderItems
+     template_name = 'orders/update_order_items.html'    
+     fields = '__all__'
+     success_url = '/orders/list-order-items/pk/'
+
+def update_order_item(request, pk):
+
+    print(pk)            
+
+    order_item = OrderItems.objects.get(id=pk)
+    if request.method == 'GET':
+
+        print(order_item.product_code)
+
+        context = {
+            'form':OrderItemsForm(
+                initial={
+                    'order_code':order_item.order_code,
+                    'item_code':order_item.item_code,
+                    'product_name':order_item.product_code.product_name,
+                    #'product_code':order_item.product_code, 
+                    'item_quantity':order_item.item_quantity
+                    
+                }
+            )
+        }
+        return render(request,'orders/update_order_items.html',context=context)
+
+    elif request.method == 'POST':
+        form = OrderItemsForm(request.POST)        
+        if form.is_valid():
+            # order_item.order_code = form.cleaned_data['order_code']
+            # order_item.item_code = form.cleaned_data['item_code']
+            # order_item.product_code = form.cleaned_data['product_code']   
+            # order_item.product_code = order_item.product_code
+            order_item.item_quantity = form.cleaned_data['item_quantity'] 
+            order_item.save()
+            order_code = order_item.order_code            
+            context = { 
+                'message':'Item de orden actualizado exitosamente',
+                'order_code':order_code,
+                'order_items':OrderItems.objects.filter(order_code = order_code)
+            }                        
+            # return render(request,'orders/update_order_items.html',context=context)
+            return render(request,'orders/list_order_items.html',context=context)
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': OrderItemsForm()                 
+            }
+            return render(request,'orders/update_order_items.html',context=context)    
 
 ################
 def delete_order_item(request, pk):

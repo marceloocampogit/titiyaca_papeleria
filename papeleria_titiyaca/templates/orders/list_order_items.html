@@ -19,6 +19,7 @@
           <td>Código Órden</td>
           <td>Nro Línea</td>                    
           <td>Producto</td>
+          <td>Cantidad</td>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
               <td>{{order_item.order_code}}</td>
               <td>{{order_item.item_code}}</td>            
               <td>{{order_item.product_code}}</td>            
+              <td>{{order_item.item_quantity}}</td>
               <td> <center> <a href="/orders/update-order-items/{{order_item.id}}/" class="btn btn-primary">Modificar</a> </center> </td>             
               <td> <center> <a href="/orders/delete-order-items/{{order_item.id}}/" class="btn btn-danger">Borrar</a> </center> </td>            
             </tr>

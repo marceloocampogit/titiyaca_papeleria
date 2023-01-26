@@ -30,7 +30,8 @@ class Orders(models.Model):
 class OrderItems(models.Model):
     order_code = models.ForeignKey(Orders, on_delete= models.CASCADE)     
     item_code = models.IntegerField()
-    product_code = models.ForeignKey(Products, on_delete= models.CASCADE)
+    product_code = models.ForeignKey(Products, on_delete= models.CASCADE, related_name='product_rel')
+    item_quantity = models.IntegerField()
     
     def __str__(self):
         return str(self.order_code)
