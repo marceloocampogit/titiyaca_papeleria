@@ -6,10 +6,10 @@
 
 {% block content %}
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <h2>Listado de Métodos de Pago</h2>    
+    <h1>Listado de Métodos de Pago</h1>    
   </div>
   <table class="table table-bordered">
-    <thead style="background-color: antiquewhite;">
+    <thead style="background-color: #E2E2E2;">
       <tr>        
         <td>Método de Pago</td>
         <td>Método de Pago (CORTO)</td>            
@@ -23,15 +23,31 @@
           <tr>            
             <td>{{payment_method.payment_method_large}}</td>
             <td>{{payment_method.payment_method_short}}</td>            
-            <td> <a href="/orders/update-payment-method/{{payment_method.id}}/" class="btn btn-primary">Modificar</a> </td>             
-            <td> <a href="/orders/delete-payment-method/{{payment_method.id}}/" class="btn btn-danger">Borrar</a> </td>
+            <td> <center> <a href="/orders/update-payment-method/{{payment_method.id}}/" class="btn btn-secondary">Modificar</a> </center> </td>             
+            <td> <center> <a href="/orders/delete-payment-method/{{payment_method.id}}/" class="btn btn-danger">Borrar</a> </center> </td>
           </tr>
         {% endfor %}                
       {% else %}   
         <h1>No hay registro de métodos de pago</h1>    
       {% endif %}
     </tbody>
-  </table>      
+  </table>    
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class= "btn btn-secondary">&laquo; Desde el comienzo</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class= "btn btn-secondary">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class= "btn btn-secondary">Siguiente</a> 
+        {% endif %}
+    </span>
+  </div>  
 {% endblock %}
 
 

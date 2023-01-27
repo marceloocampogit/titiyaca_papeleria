@@ -29,6 +29,7 @@ class ListProducts(LoginRequiredMixin , ListView):
     model = Products
     template_name = 'products/list_products.html'
     fields = '__all__'
+    paginate_by = 5
 
     def get_queryset(self, *args, **kwargs):
         productFilter = super().get_queryset(*args, **kwargs)

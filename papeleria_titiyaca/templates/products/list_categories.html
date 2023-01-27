@@ -4,7 +4,6 @@
   Listado de categorías
 {% endblock %}
 
-
 {% block nav %}
   <form class="form-inline my-2 my-lg-0" action= "/products/list-categories/" method= "GET">
     <input class="form-control mr-sm-2" type="search" name="search" placeholder="Filtre una categoría" aria-label="Search">
@@ -17,7 +16,7 @@
         <h1>Estos son nuestras categorías!</h1>
     </div>
     <table class="table table-bordered">
-      <thead style="background-color: antiquewhite;">
+      <thead style="background-color: #E2E2E2;">
         <tr>        
           <td>Código de categoria</td>
           <td>Categoría</td>
@@ -31,8 +30,8 @@
             <tr>
               <td>{{category.category_code}}</td>              
               <td>{{category.category_name}}</td>            
-              <td> <a href="/products/update-category/{{category.id}}/" class="btn btn-primary">Modificar</a> </td>             
-              <td> <a href="/products/delete-category/{{category.id}}/" class="btn btn-danger">Borrar</a> </td>
+              <td> <center><a href="/products/update-category/{{category.id}}/" class="btn btn-primary">Modificar</a> </center> </td>             
+              <td> <center><a href="/products/delete-category/{{category.id}}/" class="btn btn-danger">Borrar</a> </center> </td>
             </tr>
           {% endfor %}                
         {% else %}   
