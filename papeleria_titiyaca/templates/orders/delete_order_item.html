@@ -5,20 +5,38 @@
 {% endblock %}
 
 {% block content %}    
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <h2>Borrar Item de la Órden</h2>    
+  </div>
+  <br>
+  {% if form %}
     <center>
-    {% if message %}
-        <h2 style="color: green;"> {{message}} </h2>
-        <form action="" method="POST">
-            {% csrf_token %}                
-            <a href="/orders/list-order-items/{{order_code.id}}/" class="btn btn-primary">Volver</a>
-        </form>
-    {% else %}        
-        <h2>Item a borrar: {{order_item.item_code}}</h2>  
-        <p>Seguro que desea eliminarlo?</p>
-        <form action="" method="POST">
-            {% csrf_token %}                
-            <input type="submit" value="Si, borrar">    
-        </form>                 
-    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <table>
+            {{form.as_table}}            
+        </table>
+        <br>
+        <input type="submit" value="Borrar">           
+    </form>           
+    </center> 
+  {% endif %}
+
+  {% if form_errors %}
+    <h2 style="color: red;">Errores</h2>
+    {{form_errors}}
+  {% endif %}
+
+  {% if message %}
+    <center>
+    <h2 style="color: green;"> {{message}} </h2>
+    <h2 style="color: green;"> {{order_code}} </h2>
+    <form action="/orders/list-order-items/{{order_code}}/" method="GET">
+      {% csrf_token %}      
+      <br>
+      <input type="submit" value="Finalizar">           
+    </form>
     </center>
+  {% endif %}
 {% endblock %} 

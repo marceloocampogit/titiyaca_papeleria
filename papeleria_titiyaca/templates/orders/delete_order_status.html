@@ -4,20 +4,16 @@
   Confirmación de Borrado de Estado de Orden
 {% endblock %}
 
-{% block content %}    
-    {% if message %}
-        <h2 style="color: green;"> {{message}} </h2>
-    {% else %}        
-        <center>   
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                <h2>Estado de Orden a Eliminar: </h2>  
-            </div>    
-            <h2 style="color: red;">{{object.status}}</h2>
-            <p>¿Está seguro que desea eliminarlo?</p>
-            <form action="" method="POST">
-                {% csrf_token %}                
-                <input type="submit" value="Si, eliminar">    
-            </form>  
-        </center>        
-    {% endif %}
+{% block content %}        
+    <center>   
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <h2>Estado de Orden a Eliminar: </h2>  
+        </div>    
+        <h2 style="color: red;">{{object.status}}</h2>
+        <p>¿Está seguro que desea eliminarlo?</p>
+        <form action="" method="POST">
+            {% csrf_token %}                
+            <input type="submit" value="Si, eliminar">    
+        </form>  
+    </center>            
 {% endblock %} 

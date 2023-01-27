@@ -4,44 +4,68 @@
   Listado de Órdenes
 {% endblock %}
 
+{% block nav %}
+  <form class="form-inline my-2 my-lg-0" action= "/orders/list-orders/" method= "GET">
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Filtre una orden" aria-label="Search">
+    <button class="btn btn-outline-danger" type="submit">Buscar</button>
+  </form>
+{% endblock %}
+
 {% block content %}
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <h2>Listado de Órdenes</h2>    
+    <h1>Listado de Órdenes</h1>    
   </div>
-  <table class="table table-bordered">
-    <thead style="background-color: antiquewhite;">
-      <tr>        
-        <td>Código</td>
-        <td>Precio</td>            
-        <td>Fecha de Creación</td>
-        <td>Método de Pago</td>
-        <td>Estado</td>
-        <td>Cliente</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
-      {% if object_list %}
-        {% for order in object_list %}
-          <tr>            
-            <td>{{order.order_code}}</td>
-            <td>{{order.order_price}}</td>            
-            <td>{{order.creation_time}}</td>
-            <td>{{order.payment_method_short}}</td>
-            <td>{{order.status}}</td>
-            <td>{{order.client_name}}</td>
-            <td> <a href="/orders/list-order-items/{{order.id}}/" class="btn btn-success">Detalle</a></td>
-            <td> <a href="/orders/update-order/{{order.id}}/" class="btn btn-primary">Modificar</a></td>             
-            <td> <a href="/orders/delete-order/{{order.id}}/" class="btn btn-danger">Borrar</a></td>
-          </tr>
-        {% endfor %}                
-      {% else %}   
-        <h1>No hay registro de órdenes</h1>    
-      {% endif %}
-    </tbody>
-  </table>      
+  {% if object_list %}
+    <table class="table table-bordered">
+      <thead style="background-color: #E2E2E2;">
+        <tr>        
+          <td>Código</td>
+          <td>Precio</td>            
+          <td>Fecha de Creación</td>
+          <td>Método de Pago</td>
+          <td>Estado</td>
+          <td>Cliente</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>      
+          {% for order in object_list %}
+            <tr>            
+              <td>{{order.order_code}}</td>
+              <td>{{order.order_price}}</td>            
+              <td>{{order.creation_time}}</td>
+              <td>{{order.payment_method_short}}</td>
+              <td>{{order.status}}</td>
+              <td>{{order.client_name}}</td>
+              <td> <a href="/orders/list-order-items/{{order.id}}/" class="btn btn-success">Detalle</a></td>
+              <td> <a href="/orders/update-order/{{order.id}}/" class="btn btn-secondary">Modificar</a></td>             
+              <td> <a href="/orders/delete-order/{{order.id}}/" class="btn btn-danger">Borrar</a></td>
+            </tr>
+          {% endfor %}                        
+      </tbody>
+    </table>    
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1" class= "btn btn-secondary">&laquo; Desde el comienzo</a>
+              <a href="?page={{ page_obj.previous_page_number }}" class= "btn btn-secondary">Anterior</a>
+          {% endif %}
+
+          <span class="current">
+              Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}" class= "btn btn-secondary">Siguiente</a> 
+          {% endif %}
+      </span>
+    </div>   
+  {% else %}   
+    <br>
+    <center><h1>No hay registro de órdenes</h1></center>    
+  {% endif %}    
 {% endblock %}
 
 

@@ -5,20 +5,19 @@
 {% endblock %}
 
 {% block content %}
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    {% if order_items %}
-      <h2>Listado de Detalle de la Orden {{order_code}}</h2>    
-    {% else %}
-      <h2>Listado de Detalle de Órdenes</h2>
-    {% endif %}
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">    
+      <h1>Listado de Detalle de Órdenes</h1>    
   </div>
   {% if order_items %}
     <table class="table table-bordered">
-      <thead style="background-color: antiquewhite;">
+      <thead style="background-color: #E2E2E2;">
         <tr>        
           <td>Código Órden</td>
           <td>Nro Línea</td>                    
           <td>Producto</td>
+          <td>Cantidad</td>
+          <td></td>
+          <td></td> 
         </tr>
       </thead>
       <tbody>
@@ -28,7 +27,8 @@
               <td>{{order_item.order_code}}</td>
               <td>{{order_item.item_code}}</td>            
               <td>{{order_item.product_code}}</td>            
-              <td> <center> <a href="/orders/update-order-items/{{order_item.id}}/" class="btn btn-primary">Modificar</a> </center> </td>             
+              <td>{{order_item.item_quantity}}</td>
+              <td> <center> <a href="/orders/update-order-items/{{order_item.id}}/" class="btn btn-secondary">Modificar</a> </center> </td>             
               <td> <center> <a href="/orders/delete-order-items/{{order_item.id}}/" class="btn btn-danger">Borrar</a> </center> </td>            
             </tr>
           {% endfor %}                
@@ -36,7 +36,24 @@
           <h1>No hay registros de detalle para la presente orden</h1>    
         {% endif %}
       </tbody>
-    </table>    
+    </table>  
+    <div class="pagination">
+      <span class="step-links">
+          {% if order_items.has_previous %}
+              <a href="?page=1" class= "btn btn-secondary">&laquo; Desde el comienzo</a>
+              <a href="?page={{ order_items.previous_page_number }}" class= "btn btn-secondary">Anterior</a>
+          {% endif %}
+  
+          <span class="current">
+              Página {{ order_items.number }} de {{ order_items.paginator.num_pages }}.
+          </span>
+  
+          {% if order_items.has_next %}                            
+              <a href="?page={{ order_items.next_page_number }}" class= "btn btn-secondary">Siguiente</a> 
+              <a href="?page={{ order_items.paginator.num_pages }}" class= "btn btn-secondary">Final</a> 
+          {% endif %}
+      </span>
+    </div>       
   {% else %}   
     <br>
     <center>
