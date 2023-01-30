@@ -28,6 +28,7 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>      
@@ -39,9 +40,10 @@
               <td>{{order.payment_method_short}}</td>
               <td>{{order.status}}</td>
               <td>{{order.client_name}}</td>
-              <td> <a href="/orders/list-order-items/{{order.id}}/" class="btn btn-success">Detalle</a></td>
-              <td> <a href="/orders/update-order/{{order.id}}/" class="btn btn-secondary">Modificar</a></td>             
-              <td> <a href="/orders/delete-order/{{order.id}}/" class="btn btn-danger">Borrar</a></td>
+              <td> <a href="/orders/list-order-items/{{order.id}}/" class="btn btn-success">Detalle</a></td>                           
+              <td> <a href="/orders/update-order-status-reg-user/{{order.id}}/" class="btn btn-primary">Act. estado</a></td>
+              <td> <a href="/orders/update-order/{{order.id}}/" class="btn btn-secondary">Modificar</a></td>
+              <td> <a href="/orders/delete-order/{{order.id}}/" class="btn btn-danger">Borrar</a></td>              
             </tr>
           {% endfor %}                        
       </tbody>

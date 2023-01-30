@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from orders.models import OrderStatus, PaymentMethod, Orders, OrderItems
-from orders.forms import UpdateOrderItemsForm, DeleteOrderItemsForm
+from orders.forms import UpdateOrderItemsForm, DeleteOrderItemsForm, UpdateOrderStatusRegUserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
@@ -23,6 +23,41 @@ class OrderDeleteView(DeleteView):
     model = Orders
     template_name = 'orders/delete_order.html'        
     success_url = '/orders/list-orders/'    
+
+def update_order_status_reg_user(request, pk): 
+    order = Orders.objects.get(id=pk)
+    if request.method == 'GET':
+        context = {
+            'form':UpdateOrderStatusRegUserForm(
+                initial={
+                    'order_code':order.order_code,
+                    'order_price':order.order_price ,
+                    'creation_time':order.creation_time,                    
+                    'payment_method_short':order.payment_method_short,
+                    'client_name':order.client_name,
+                    'status':order.status
+                }
+            )
+        }
+        return render(request,'orders/update_order_status_reg_user.html',context=context)
+
+    elif request.method == 'POST':
+        form = UpdateOrderStatusRegUserForm(request.POST)        
+        if form.is_valid():            
+            order.status = form.cleaned_data['status'] 
+            order.save()
+            order_code = order.order_code            
+            context = { 
+                'message':'Item de orden actualizado exitosamente',
+                'order_code':order_code,                
+            }                                                
+            return redirect('list_orders')
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': UpdateOrderStatusRegUserForm()                 
+            }
+            return render(request,'orders/update_order_status_reg_user.html',context=context)   
 
 # Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
 # class PaymentMethodListView(LoginRequiredMixin, ListView):
@@ -52,7 +87,7 @@ class OrderItemsUpdateView(UpdateView):
      fields = '__all__'
      success_url = '/orders/list-order-items/pk/'
 
-def update_order_item(request, pk):    
+def update_order_item(request, pk): 
     order_item = OrderItems.objects.get(id=pk)
     if request.method == 'GET':
         context = {
@@ -78,8 +113,8 @@ def update_order_item(request, pk):
                 'message':'Item de orden actualizado exitosamente',
                 'order_code':order_code,
                 'order_items':OrderItems.objects.filter(order_code = order_code)
-            }                                    
-            return render(request,'orders/list_order_items.html',context=context)
+            }                                                
+            return redirect('list_orders_items', pk=order_item.order_code.id)
         else:
             context = {
                 'form_errors':form.errors,
@@ -110,15 +145,17 @@ def delete_order_item(request, pk):
             'order_code':order_code,
             'order_items':OrderItems.objects.filter(order_code = order_code)  
             }
-        return render(request,'orders/list_order_items.html',context=context)        
+        return redirect('list_orders_items', pk=order_item.order_code.id)
+        #return render(request,'orders/list_order_items.html',context=context)        
 
-def list_order_items(request, order_code):    
-    order_items = OrderItems.objects.filter(order_code = order_code)    
+# def list_order_items(request, order_code):   
+def list_order_items(request, pk):            
+    order_items = OrderItems.objects.filter(order_code = pk)    
     paginator = Paginator(order_items, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-            'order_code':order_code,
+            # 'order_code':order_code,
             'order_items':page_obj,
     }
     return render(request,'orders/list_order_items.html',context=context)
