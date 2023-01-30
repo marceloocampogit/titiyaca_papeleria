@@ -11,15 +11,15 @@
   <br>
   {% if form %}
     <center>
-    <form action="" method="POST">
-        {% csrf_token %}
-        
-        <table>
-            {{form.as_table}}
-        </table>
-        <br>
-        <input type="submit" value="Crear nueva categoria">    
-    </form> 
+      <form action="" method="POST">
+          {% csrf_token %}
+          
+          <table>
+              {{form.as_table}}
+          </table>
+          <br>
+          <input type="submit" value="Crear nueva categoria">    
+      </form> 
     </center> 
   {% endif %}
 
