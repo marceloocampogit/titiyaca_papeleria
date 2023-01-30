@@ -1,6 +1,7 @@
 from django.urls import path
 from orders.views import OrderCreateView, OrderUpdateView, OrderDeleteView, OrdersListView, \
      OrderItemsCreateView, OrderItemsUpdateView, update_order_item, delete_order_item, list_order_items, \
+     update_order_status_reg_user, \
      OrderStatusCreateView,  OrderStatusListView, OrderStatusUpdateView, OrderStatusDeleteView, \
 PaymentMethodCreateView, PaymentMethodUpdateView, PaymentMethodDeleteView, PaymentMethodListView
 
@@ -9,6 +10,8 @@ urlpatterns = [
     path('create-order/', OrderCreateView.as_view() , name='create_order'),
     # --
     path('update-order/<int:pk>/', OrderUpdateView.as_view() , name='update_order'),
+    # --
+    path('update-order-status-reg-user/<int:pk>/', update_order_status_reg_user),    
     # --
     path('delete-order/<int:pk>/', OrderDeleteView.as_view() , name='delete_order'),
     # --
@@ -20,7 +23,8 @@ urlpatterns = [
     # --
     path('delete-order-items/<int:pk>/', delete_order_item),
     # --
-    path('list-order-items/<int:order_code>/', list_order_items),
+    # path('list-order-items/<int:order_code>/', list_order_items, name='list_orders_items'),
+    path('list-order-items/<int:pk>/', list_order_items, name='list_orders_items'),
     # -- Order Status -------------------------------------------------------------------------------
     path('create-order-status/', OrderStatusCreateView.as_view() , name='create_order_status'),
     # --
