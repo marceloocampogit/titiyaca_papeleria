@@ -117,14 +117,20 @@
                     <a class="nav-link" href="/about-us/">Sobre nosotros</a>
                   </li>
                   {% if request.user.is_authenticated %}
-                  <li class="nav-item dropdown">  
+                  <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style= "margin-left: 60px;">
                       {{request.user.username}}
                     </a>
+                    {% if request.user.profile_user.profile_picture.url != '' %}
+                      <img src="{{request.user.profile_user.profile_picture.url}}" alt="profile_picture" width="50" height="50" style="border-radius: 50%;">
+                    {% endif %}
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/users/update/">Actualizar datos</a>
-                      </li>                        
+                      </li>
+                      <li class="dropdown-submenu">
+                        <a class="dropdown-item text-white" href="/users/update/profile/">Actualizar perfil</a>
+                      </li>                               
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/users/logout/">Cerrar sesion</a>
                       </li>

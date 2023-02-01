@@ -2,11 +2,12 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LogoutView
-from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect
 
-from .forms import UserUpdateForm
+from .forms import UserUpdateForm, UserProfileForm
+
+from .models import ProfileUser
 
 # Create your views here.
 
@@ -52,8 +53,9 @@ def register_view(request):
     elif request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save() #Guarda el usuario en la base de datos
-            return redirect('login') #Redirecciona a la vista login
+            user = form.save() #Guarda el usuario en la base de datos
+            ProfileUser.objects.create(user = user)
+            return redirect('home') #Redirecciona a la vista home
 
         context = {
             'errores': form.errors,
@@ -93,4 +95,40 @@ def update_user(request):
 
 class LogoutUser(LogoutView):
     template_name = 'users/logout.html'
+
+def update_profile_user(request):
+    user = request.user
+    if request.method == 'GET':
+        form = UserProfileForm(initial={
+
+            'phone': request.user.profile_user.phone,
+            'birth_date': request.user.profile_user.birth_date,
+            'city': request.user.profile_user.city,
+            'country': request.user.profile_user.country,
+            'profile_picture': request.user.profile_user.profile_picture
+
+        })
+        context = {
+            'form': form
+        }
+        return render(request, 'users/update_profile.html', context=context)
+
+    elif request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+
+            user.profile_user.phone = form.cleaned_data.get('phone')
+            user.profile_user.birth_date = form.cleaned_data.get('birth_date')
+            user.profile_user.city = form.cleaned_data.get('city')
+            user.profile_user.country = form.cleaned_data.get('country')
+            user.profile_user.profile_picture = form.cleaned_data.get('profile_picture')
+            user.profile_user.save()
+
+            return redirect('home') #Redirecciona a la vista home
+
+        context = {
+            'errores': form.errors,
+            'form': UserProfileForm()
+        }    
+        return render(request, 'users/update_profile.html', context=context)
 
