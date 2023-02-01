@@ -29,7 +29,7 @@ class ListProducts(LoginRequiredMixin , ListView):
     model = Products
     template_name = 'products/list_products.html'
     fields = '__all__'
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self, *args, **kwargs):
         productFilter = super().get_queryset(*args, **kwargs)
@@ -61,6 +61,7 @@ class ListCategories(ListView):
     model = Categories
     template_name = 'products/list_categories.html'
     fields = '__all__'
+    paginate_by = 3
 
     def get_queryset(self, *args, **kwargs):
         categoryFilter = super().get_queryset(*args, **kwargs)

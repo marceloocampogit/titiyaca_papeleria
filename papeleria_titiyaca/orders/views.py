@@ -183,7 +183,7 @@ class OrderStatusDeleteView(DeleteView):
 class OrderStatusListView(ListView):
     model = OrderStatus
     template_name = 'orders/list_orders_status.html'
-    paginate_by = 5
+    paginate_by = 4
 
 # Payment Method --------------------------------------------------------        
 class PaymentMethodCreateView(CreateView):
@@ -208,5 +208,5 @@ class PaymentMethodDeleteView(DeleteView):
 class PaymentMethodListView(ListView):
     model = PaymentMethod
     template_name = 'orders/list_payment_methods.html'
-    paginate_by = 5
+    paginate_by = 4
     

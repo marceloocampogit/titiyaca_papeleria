@@ -20,8 +20,8 @@
         <tr>        
           <td>Código de categoria</td>
           <td>Categoría</td>
-          <td>Deseas modificar?</td>
-          <td>Deseas eliminar?</td>                
+          <td></td>
+          <td></td>                
         </tr>
       </thead>
       <tbody>
@@ -30,7 +30,7 @@
             <tr>
               <td>{{category.category_code}}</td>              
               <td>{{category.category_name}}</td>            
-              <td> <center><a href="/products/update-category/{{category.id}}/" class="btn btn-primary">Modificar</a> </center> </td>             
+              <td> <center><a href="/products/update-category/{{category.id}}/" class="btn btn-secondary">Modificar</a> </center> </td>             
               <td> <center><a href="/products/delete-category/{{category.id}}/" class="btn btn-danger">Borrar</a> </center> </td>
             </tr>
           {% endfor %}                
@@ -39,4 +39,20 @@
         {% endif %}
       </tbody>
     </table>      
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1" class= "btn btn-secondary">&laquo; Desde el comienzo</a>
+              <a href="?page={{ page_obj.previous_page_number }}" class= "btn btn-secondary">Anterior</a>
+          {% endif %}
+
+          <span class="current">
+              Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}" class= "btn btn-secondary">Siguiente</a> 
+          {% endif %}
+      </span>
+    </div>   
 {% endblock content %}
