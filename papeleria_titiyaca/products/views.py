@@ -8,24 +8,24 @@ from .forms import NewProductForm, NewCategoryForm
 # Create your views here.
 
 # ------------------------------------------- Products GViews ------------------------------------------- #
-class CreateProduct(CreateView):
+class CreateProduct(LoginRequiredMixin, CreateView):
     model = Products
     template_name = 'products/create_product.html'
     fields = '__all__'
     success_url = '/products/list-products/'
 
-class DeleteProduct(DeleteView):
+class DeleteProduct(LoginRequiredMixin, DeleteView):
     model = Products
     template_name = 'products/delete_product.html'
     success_url = '/products/list-products/'
 
-class UpdateProduct(UpdateView):
+class UpdateProduct(LoginRequiredMixin, UpdateView):
     model = Products
     template_name = 'products/update_product.html'
     fields = '__all__'
     success_url = '/products/list-products/'
 
-class ListProducts(LoginRequiredMixin , ListView):
+class ListProducts(ListView):
     model = Products
     template_name = 'products/list_products.html'
     fields = '__all__'
@@ -40,18 +40,18 @@ class ListProducts(LoginRequiredMixin , ListView):
 
 # ------------------------------------------- Categories GViews ------------------------------------------- #
 
-class CreateCategory(CreateView):
+class CreateCategory(LoginRequiredMixin, CreateView):
     model = Categories
     template_name = 'products/create_category.html'
     fields = '__all__'
     success_url = '/products/list-categories/'
 
-class DeleteCategory(DeleteView):
+class DeleteCategory(LoginRequiredMixin, DeleteView):
     model = Categories
     template_name = 'products/delete_category.html'
     success_url = '/products/list-categories/'
 
-class UpdateCategory(UpdateView):
+class UpdateCategory(LoginRequiredMixin, UpdateView):
     model = Categories
     template_name = 'products/update_category.html'
     fields = '__all__'

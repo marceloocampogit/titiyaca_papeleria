@@ -6,20 +6,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
 # Orders ----------------------------------------------------------------
-class OrderCreateView(CreateView):
+class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Orders
     template_name = 'orders/create_order.html'    
     fields = '__all__'
     # success_url = '/orders/list-orders/'   
     success_url = '/orders/create-order-items/'
 
-class OrderUpdateView(UpdateView):  
+class OrderUpdateView(LoginRequiredMixin, UpdateView):  
     model = Orders
     template_name = 'orders/update_order.html'        
     fields = '__all__'
     success_url = '/orders/list-orders/'      
 
-class OrderDeleteView(DeleteView):
+class OrderDeleteView(LoginRequiredMixin, DeleteView):
     model = Orders
     template_name = 'orders/delete_order.html'        
     success_url = '/orders/list-orders/'    
@@ -75,17 +75,17 @@ class OrdersListView(ListView):
         return orderFilter
 
 # Order Items ----------------------------------------------------------------
-class OrderItemsCreateView(CreateView):
+class OrderItemsCreateView(LoginRequiredMixin, CreateView):
     model = OrderItems
     template_name = 'orders/create_order_items.html'    
     fields = '__all__'
     success_url = '/orders/create-order-items/'     
 
-class OrderItemsUpdateView(UpdateView):
-     model = OrderItems
-     template_name = 'orders/update_order_items.html'    
-     fields = '__all__'
-     success_url = '/orders/list-order-items/pk/'
+class OrderItemsUpdateView(LoginRequiredMixin, UpdateView):
+    model = OrderItems
+    template_name = 'orders/update_order_items.html'    
+    fields = '__all__'
+    success_url = '/orders/list-order-items/pk/'
 
 def update_order_item(request, pk): 
     order_item = OrderItems.objects.get(id=pk)
@@ -161,19 +161,19 @@ def list_order_items(request, pk):
     return render(request,'orders/list_order_items.html',context=context)
 
 # Order Status ----------------------------------------------------------
-class OrderStatusCreateView(CreateView):
+class OrderStatusCreateView(LoginRequiredMixin, CreateView):
     model = OrderStatus
     template_name = 'orders/create_order_status.html'    
     fields = '__all__'
     success_url = '/orders/list-orders-status/'    
 
-class OrderStatusUpdateView(UpdateView):  
+class OrderStatusUpdateView(LoginRequiredMixin, UpdateView):  
     model = OrderStatus
     template_name = 'orders/update_order_status.html'        
     fields = '__all__'
     success_url = '/orders/list-orders-status/'  
 
-class OrderStatusDeleteView(DeleteView):
+class OrderStatusDeleteView(LoginRequiredMixin, DeleteView):
     model = OrderStatus
     template_name = 'orders/delete_order_status.html'        
     success_url = '/orders/list-orders-status/'
@@ -186,19 +186,19 @@ class OrderStatusListView(ListView):
     paginate_by = 4
 
 # Payment Method --------------------------------------------------------        
-class PaymentMethodCreateView(CreateView):
+class PaymentMethodCreateView(LoginRequiredMixin, CreateView):
     model = PaymentMethod
     template_name = 'orders/create_payment_method.html'    
     fields = '__all__'
     success_url = '/orders/list-payment-methods/'        
 
-class PaymentMethodUpdateView(UpdateView):  
+class PaymentMethodUpdateView(LoginRequiredMixin, UpdateView):  
     model = PaymentMethod
     template_name = 'orders/update_payment_method.html'        
     fields = '__all__'
     success_url = '/orders/list-payment-methods/'    
 
-class PaymentMethodDeleteView(DeleteView):
+class PaymentMethodDeleteView(LoginRequiredMixin, DeleteView):
     model = PaymentMethod
     template_name = 'orders/delete_payment_method.html'        
     success_url = '/orders/list-payment-methods/'

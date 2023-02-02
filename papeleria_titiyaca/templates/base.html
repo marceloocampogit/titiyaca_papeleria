@@ -76,9 +76,11 @@
                       Órdenes
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      {% if request.user.is_authenticated and request.user.is_superuser %}
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/orders/create-order/">Crear</a>
-                      </li>                        
+                      </li>
+                      {% endif %}                        
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/orders/list-orders/">Listar</a>
                       </li>                      
@@ -90,9 +92,11 @@
                         Métodos de Pago
                       </a>
                       <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                        {% if request.user.is_authenticated and request.user.is_superuser %}
                         <li class="dropdown-submenu">
                           <a class="dropdown-item text-white" href="/orders/create-payment-method/">Crear</a>
                         </li>                        
+                        {% endif %}
                         <li class="dropdown-submenu">
                           <a class="dropdown-item text-white" href="/orders/list-payment-methods/">Listar</a>
                         </li>
@@ -104,9 +108,11 @@
                       Estados de Órdenes
                     </a>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                      {% if request.user.is_authenticated and request.user.is_superuser %}
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/orders/create-order-status/">Crear</a>
-                      </li>                        
+                      </li>                 
+                      {% endif %}       
                       <li class="dropdown-submenu">
                         <a class="dropdown-item text-white" href="/orders/list-orders-status/">Listar</a>
                       </li>
@@ -118,7 +124,7 @@
                   </li>
                   {% if request.user.profile_user.profile_picture.url != '' %}
                       <img src="{{request.user.profile_user.profile_picture.url}}" alt="profile_picture" width="40" height="40" style="border-radius: 50%; margin-left: 70px;">
-                    {% endif %}
+                  {% endif %}
                   {% if request.user.is_authenticated %}
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style= "margin-left: 10px;">
