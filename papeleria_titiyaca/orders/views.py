@@ -178,9 +178,7 @@ class OrderStatusDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'orders/delete_order_status.html'        
     success_url = '/orders/list-orders-status/'
 
-# Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
-# class PaymentMethodListView(LoginRequiredMixin, ListView):
-class OrderStatusListView(ListView):
+class OrderStatusListView(LoginRequiredMixin, ListView):
     model = OrderStatus
     template_name = 'orders/list_orders_status.html'
     paginate_by = 4
@@ -203,8 +201,6 @@ class PaymentMethodDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'orders/delete_payment_method.html'        
     success_url = '/orders/list-payment-methods/'
 
-# Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
-# class PaymentMethodListView(LoginRequiredMixin, ListView):
 class PaymentMethodListView(LoginRequiredMixin, ListView):
     model = PaymentMethod
     template_name = 'orders/list_payment_methods.html'
