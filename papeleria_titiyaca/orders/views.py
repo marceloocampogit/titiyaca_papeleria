@@ -61,7 +61,7 @@ def update_order_status_reg_user(request, pk):
 
 # Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
 # class PaymentMethodListView(LoginRequiredMixin, ListView):
-class OrdersListView(ListView):
+class OrdersListView(LoginRequiredMixin, ListView):
     model = Orders
     template_name = 'orders/list_orders.html'    
     fields = '__all__'
@@ -205,7 +205,7 @@ class PaymentMethodDeleteView(LoginRequiredMixin, DeleteView):
 
 # Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
 # class PaymentMethodListView(LoginRequiredMixin, ListView):
-class PaymentMethodListView(ListView):
+class PaymentMethodListView(LoginRequiredMixin, ListView):
     model = PaymentMethod
     template_name = 'orders/list_payment_methods.html'
     paginate_by = 4

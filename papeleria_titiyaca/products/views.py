@@ -25,7 +25,7 @@ class UpdateProduct(LoginRequiredMixin, UpdateView):
     fields = '__all__'
     success_url = '/products/list-products/'
 
-class ListProducts(ListView):
+class ListProducts(LoginRequiredMixin, ListView):
     model = Products
     template_name = 'products/list_products.html'
     fields = '__all__'
@@ -57,7 +57,7 @@ class UpdateCategory(LoginRequiredMixin, UpdateView):
     fields = '__all__'
     success_url = '/products/list-categories/'
 
-class ListCategories(ListView):
+class ListCategories(LoginRequiredMixin, ListView):
     model = Categories
     template_name = 'products/list_categories.html'
     fields = '__all__'
