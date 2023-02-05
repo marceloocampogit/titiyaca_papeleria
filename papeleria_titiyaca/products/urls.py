@@ -1,7 +1,5 @@
-from django.contrib import admin
 from django.urls import path
 
-from products.views import create_product, list_products, list_categories, create_category, update_product
 from products.views import CreateProduct, UpdateProduct, DeleteProduct, ListProducts, CreateCategory, ListCategories, UpdateCategory, DeleteCategory
 
 urlpatterns = [

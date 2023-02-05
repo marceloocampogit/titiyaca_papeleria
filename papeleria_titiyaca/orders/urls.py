@@ -23,7 +23,6 @@ urlpatterns = [
     # --
     path('delete-order-items/<int:pk>/', delete_order_item),
     # --
-    # path('list-order-items/<int:order_code>/', list_order_items, name='list_orders_items'),
     path('list-order-items/<int:pk>/', list_order_items, name='list_orders_items'),
     # -- Order Status -------------------------------------------------------------------------------
     path('create-order-status/', OrderStatusCreateView.as_view() , name='create_order_status'),

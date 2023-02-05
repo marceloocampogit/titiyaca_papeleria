@@ -92,7 +92,6 @@ def update_user(request):
         }
         return render(request, 'users/update.html', context=context)
 
-
 class LogoutUser(LogoutView):
     template_name = 'users/logout.html'
 

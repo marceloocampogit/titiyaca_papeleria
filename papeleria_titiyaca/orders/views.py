@@ -10,7 +10,6 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Orders
     template_name = 'orders/create_order.html'    
     fields = '__all__'
-    # success_url = '/orders/list-orders/'   
     success_url = '/orders/create-order-items/'
 
 class OrderUpdateView(LoginRequiredMixin, UpdateView):  
@@ -59,8 +58,6 @@ def update_order_status_reg_user(request, pk):
             }
             return render(request,'orders/update_order_status_reg_user.html',context=context)   
 
-# Esto iría con LoginRequiredMixin pero aun no tenemos manejo de usuarios y logins
-# class PaymentMethodListView(LoginRequiredMixin, ListView):
 class OrdersListView(LoginRequiredMixin, ListView):
     model = Orders
     template_name = 'orders/list_orders.html'    
@@ -146,16 +143,14 @@ def delete_order_item(request, pk):
             'order_items':OrderItems.objects.filter(order_code = order_code)  
             }
         return redirect('list_orders_items', pk=order_item.order_code.id)
-        #return render(request,'orders/list_order_items.html',context=context)        
+        
 
-# def list_order_items(request, order_code):   
 def list_order_items(request, pk):            
     order_items = OrderItems.objects.filter(order_code = pk)    
     paginator = Paginator(order_items, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-            # 'order_code':order_code,
             'order_items':page_obj,
     }
     return render(request,'orders/list_order_items.html',context=context)
