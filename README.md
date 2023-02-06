@@ -1,5 +1,7 @@
 # titiyaca_papeleria
 
+Integrantes: Marcelo Ocampo - Carlos Rodriguez.
+
 En este documento se va a describir las funcionalidades de la web.
 
 En en desarrollo se crearon 3 aplicaciones, users, orders y products.
@@ -15,3 +17,9 @@ Se creo una pestaña /aboutus donde con un carousel brinda información personal
 Las funcionalidades de actualizacion de usuario una vez loggeado, se hace a traves de un desplegable donde se encuentra el nombre de usuario.
 
 Se agrego la funcionalidad que unicamente se pueda listar o crear si el usuario esta dentro de la web, sino los envía directamente al login.
+
+En cuanto a la distribución de tareas, el trabajo se dividio más o menos de la siguiente forma:
+
+Orders - Carlos Rodriguez
+Products / Users - Marcelo Ocampo
+Templates / configuración / lógica y decisiones - En conjunto
