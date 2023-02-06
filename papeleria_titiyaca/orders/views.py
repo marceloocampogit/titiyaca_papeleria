@@ -12,6 +12,12 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = '/orders/create-order-items/'
 
+    Orders._meta.get_field('order_code').verbose_name = "Código orden"
+    Orders._meta.get_field('order_price').verbose_name = "Precio orden"
+    Orders._meta.get_field('payment_method_short').verbose_name = "Método de pago"
+    Orders._meta.get_field('status').verbose_name = "Estado"
+    Orders._meta.get_field('client_name').verbose_name = "Nombre cliente"
+
 class OrderUpdateView(LoginRequiredMixin, UpdateView):  
     model = Orders
     template_name = 'orders/update_order.html'        
@@ -76,7 +82,12 @@ class OrderItemsCreateView(LoginRequiredMixin, CreateView):
     model = OrderItems
     template_name = 'orders/create_order_items.html'    
     fields = '__all__'
-    success_url = '/orders/create-order-items/'     
+    success_url = '/orders/create-order-items/'
+
+    OrderItems._meta.get_field('order_code').verbose_name = "Código orden"
+    OrderItems._meta.get_field('item_code').verbose_name = "Código item"
+    OrderItems._meta.get_field('product_code').verbose_name = "Producto"
+    OrderItems._meta.get_field('item_quantity').verbose_name = "Cantidad item"
 
 def update_order_item(request, pk): 
     order_item = OrderItems.objects.get(id=pk)
@@ -156,6 +167,8 @@ class OrderStatusCreateView(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = '/orders/list-orders-status/'    
 
+    OrderStatus._meta.get_field('status').verbose_name = "Estado orden"
+
 class OrderStatusUpdateView(LoginRequiredMixin, UpdateView):  
     model = OrderStatus
     template_name = 'orders/update_order_status.html'        
@@ -177,7 +190,10 @@ class PaymentMethodCreateView(LoginRequiredMixin, CreateView):
     model = PaymentMethod
     template_name = 'orders/create_payment_method.html'    
     fields = '__all__'
-    success_url = '/orders/list-payment-methods/'        
+    success_url = '/orders/list-payment-methods/'  
+
+    PaymentMethod._meta.get_field('payment_method_large').verbose_name = "Metodo de pago largo"
+    PaymentMethod._meta.get_field('payment_method_short').verbose_name = "Metodo de pago corto"    
 
 class PaymentMethodUpdateView(LoginRequiredMixin, UpdateView):  
     model = PaymentMethod

@@ -1,9 +1,7 @@
-from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from products.models import Categories, Products
-from .forms import NewProductForm, NewCategoryForm
 
 # Create your views here.
 
@@ -13,6 +11,12 @@ class CreateProduct(LoginRequiredMixin, CreateView):
     template_name = 'products/create_product.html'
     fields = '__all__'
     success_url = '/products/list-products/'
+
+    Products._meta.get_field('product_name').verbose_name = "Nombre producto"
+    Products._meta.get_field('product_code').verbose_name = "Código producto"
+    Products._meta.get_field('category_code').verbose_name = "Nombre categoría"
+    Products._meta.get_field('product_price').verbose_name = "Precio producto"
+    Products._meta.get_field('product_description').verbose_name = "Descripción"
 
 class DeleteProduct(LoginRequiredMixin, DeleteView):
     model = Products
@@ -45,6 +49,9 @@ class CreateCategory(LoginRequiredMixin, CreateView):
     template_name = 'products/create_category.html'
     fields = '__all__'
     success_url = '/products/list-categories/'
+
+    Categories._meta.get_field('category_code').verbose_name = "Código categoría"
+    Categories._meta.get_field('category_name').verbose_name = "Nombre categoría"
 
 class DeleteCategory(LoginRequiredMixin, DeleteView):
     model = Categories
