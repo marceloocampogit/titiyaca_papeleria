@@ -78,12 +78,6 @@ class OrderItemsCreateView(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = '/orders/create-order-items/'     
 
-class OrderItemsUpdateView(LoginRequiredMixin, UpdateView):
-    model = OrderItems
-    template_name = 'orders/update_order_items.html'    
-    fields = '__all__'
-    success_url = '/orders/list-order-items/pk/'
-
 def update_order_item(request, pk): 
     order_item = OrderItems.objects.get(id=pk)
     if request.method == 'GET':
