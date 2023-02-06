@@ -1,6 +1,6 @@
 from django.urls import path
 from orders.views import OrderCreateView, OrderUpdateView, OrderDeleteView, OrdersListView, \
-     OrderItemsCreateView, OrderItemsUpdateView, update_order_item, delete_order_item, list_order_items, \
+     OrderItemsCreateView, update_order_item, delete_order_item, list_order_items, \
      update_order_status_reg_user, \
      OrderStatusCreateView,  OrderStatusListView, OrderStatusUpdateView, OrderStatusDeleteView, \
 PaymentMethodCreateView, PaymentMethodUpdateView, PaymentMethodDeleteView, PaymentMethodListView
